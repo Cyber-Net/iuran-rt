@@ -24,4 +24,27 @@
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // Inisialisasi Supabase
+  const _supabase = supabase.createClient('URL_PROYEK_KAMU', 'ANON_KEY_KAMU');
+
+  // Contoh fungsi Login Sederhana
+  async function loginWarga(idInput, pinInput) {
+    const { data, error } = await _supabase
+      .from('warga')
+      .select('*')
+      .eq('id_warga', idInput)
+      .eq('pin_warga', pinInput)
+      .single();
+
+    if (error || !data) {
+      alert("ID atau PIN salah!");
+    } else {
+      alert("Selamat datang, " + data.nama_warga);
+      // Simpan session atau arahkan ke halaman dashboard
+    }
+  }
+</script>
 </html>
